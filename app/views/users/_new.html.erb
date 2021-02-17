@@ -1,0 +1,15 @@
+<h2>User info</h2>
+    <%= attachment_image_tag current_user, :profile_image, :fill, 100, 100, format: 'jpeg', fallback: "no_image.jpg", size: "100x100" %>
+<table class="table">
+  <tr>
+    <td>name</td>
+    <td><%= current_user.name %></td>
+  </tr>
+  <tr>
+    <td>introduction</td>
+    <td><%= current_user.introduction %></td>
+  </tr>
+</table>
+<%= link_to edit_user_path(current_user.id) do %>
+  <i class="fas fa-user-cog btn-block btn-light btn btn-outline-secondary"></i>
+<% end %>
