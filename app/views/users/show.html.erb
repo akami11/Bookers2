@@ -13,9 +13,26 @@
           <td>introduction</td>
           <td><%= @user.introduction %></td>
         </tr>
+        <tr>
+          <td>フォロー数</td>
+          <td><%= link_to "#{@user.follower.count}", following_user_path(@user.id)%></td>
+        </tr>
+        <tr>
+          <td>フォロワー数</td>
+          <td><%= link_to "#{@user.followed.count}", followers_user_path(@user.id)%></td>
+        </tr>
       </table>
-      <%= link_to edit_user_path(@user.id) do %>
-        <i class="fas fa-user-cog btn-block btn-light btn btn-outline-secondary"></i>
+      <% unless @user == current_user %>
+        <% if current_user.follower.exists?(followed_id: @user.id) %>
+         <%= link_to "フォローを外す", user_relationship_path(@user.id), class: "btn btn-success", method: :delete %>
+        <% else %>
+         <%= link_to "フォローする", user_relationships_path(@user.id), class: "btn btn-success", method: :post %>
+        <% end %>
+      <% end %>
+      <% if @user  == current_user %>
+        <%= link_to edit_user_path(@user.id) do %>
+          <i class="fas fa-user-cog btn-block btn-light btn btn-outline-secondary"></i>
+        <% end %>
       <% end %>
       <%= render "books/new", book: @book %>
     </div>

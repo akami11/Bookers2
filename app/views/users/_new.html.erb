@@ -9,6 +9,15 @@
     <td>introduction</td>
     <td><%= current_user.introduction %></td>
   </tr>
+  <tr>
+    <td>フォロー数</td>
+    <td><%= link_to "#{current_user.follower.count}", following_user_path(current_user)%></td>
+  </tr>
+  <tr>
+    <td>フォロワー数</td>
+    <td><%= link_to "#{current_user.followed.count}", followers_user_path(current_user)%></td>
+  </tr>
+  <tr></tr>
 </table>
 <%= link_to edit_user_path(current_user.id) do %>
   <i class="fas fa-user-cog btn-block btn-light btn btn-outline-secondary"></i>
